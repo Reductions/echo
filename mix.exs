@@ -7,6 +7,7 @@ defmodule Echo.Mixfile do
      elixir: "~> 1.4",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     aliases: aliases(),
      deps: deps()]
   end
 
@@ -16,6 +17,16 @@ defmodule Echo.Mixfile do
   def application do
     # Specify extra applications you'll use from Erlang/Elixir
     [extra_applications: [:logger]]
+  end
+
+  defp greet(_) do
+    IO.puts "Hi"
+  end
+
+  defp aliases do
+    [ greet: &greet/1,
+      gc: ["greet", "deps.get", "compile"]
+    ]
   end
 
   # Dependencies can be Hex packages:
